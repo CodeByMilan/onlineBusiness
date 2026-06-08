@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+
 import { CommonModule } from 'src/common/common.module';
-import { RouterModule } from '@nestjs/core';
+import { AppController } from './app.controller';
+import { RouterModule } from 'src/router/router.module';
 
 @Module({
   imports: [CommonModule, RouterModule],

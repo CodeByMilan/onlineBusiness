@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AdminRouterModule } from './router/routes/admin.router.module';
 import { UserRouterModule } from './router/routes/user.router.module';
 
-export default async function (app: NestExpressApplication) {
+export default async function SwaggerInit(app: NestExpressApplication) {
   const configService = app.get(ConfigService);
 
   // for admin
@@ -25,7 +25,7 @@ export default async function (app: NestExpressApplication) {
 
   SwaggerModule.setup('/admin-docs', app, adminDocument, {
     explorer: true,
-    customSiteTitle: 'Visa Admin',
+    customSiteTitle: 'Lish Admin',
     swaggerOptions: {
       docExpansion: 'none',
       filter: true,
@@ -51,7 +51,7 @@ export default async function (app: NestExpressApplication) {
 
   SwaggerModule.setup('/user-docs', app, userDocument, {
     explorer: true,
-    customSiteTitle: 'Visa Customer',
+    customSiteTitle: 'Lish Customer',
     swaggerOptions: {
       docExpansion: 'none',
       filter: true,

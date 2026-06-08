@@ -14,11 +14,12 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 import { IUpdateOptions } from 'src/common/database/base/interfaces/updateOption.interface';
 import { Not } from 'typeorm';
 import { IDeleteOptions } from 'src/common/database/base/interfaces/deleteOption.interface';
+import { ICreateOptions } from 'src/common/database/base/interfaces/createOption.interface';
 
 @Injectable()
 export class UserService {
   constructor(private readonly userRepo: UserRepository) {}
-  async create(createDto: CreateUserDto) {
+  async create(createDto: CreateUserDto, options?: ICreateOptions) {
     await this.checkUserExists(createDto);
     const data = await this.userRepo._create(createDto);
     return data;
