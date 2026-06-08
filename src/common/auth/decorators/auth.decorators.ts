@@ -3,10 +3,15 @@ import { AuthJwtAccessGuard } from '../guards/jwt-access/auth.jwt-access.guard';
 import { UserTypeGuard } from 'src/modules/authentication/guards/user-type.guard';
 import { applyDecorators, UseGuards } from '@nestjs/common';
 
+/* 
+simply combines multiple guards into one guard 
+first AuthJwtAccessGuard checks the JwtToken and validate it and puts the user id in request 
+secondly UserPutToRequestGuard  extracts the user details from the database and keep the user details in request._user
+thirdly UserTypeGuard splits the url and checks if the url user type matches the login user type and processed forward
+
+*/
 export function UserProtected(options?: {
-  isRefresh?: boolean;
   addRole?: boolean;
-  isSuperAdmin?: boolean;
 }): MethodDecorator {
   const decorators: any[] = [
     AuthJwtAccessGuard,

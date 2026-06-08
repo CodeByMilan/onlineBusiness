@@ -8,6 +8,8 @@ import { ResponseMessage } from 'src/common/response/decorators/responseMessage.
 import { UserFilterDto } from '../dto/filter-user.dto';
 import { isFalsy } from 'src/common/request/validators/custom-validator';
 import { AuthJwtAccessGuard } from 'src/common/auth/guards/jwt-access/auth.jwt-access.guard';
+import { ApiDocs } from 'src/common/doc/common-docs';
+import { UserProtected } from 'src/common/auth/decorators/auth.decorators';
 
 @ApiTags('User')
 @Controller('user')
@@ -42,8 +44,10 @@ export class UserAdminController {
     }
   }
 
-  @ApiBearerAuth('accessToken')
-  @UseGuards(AuthJwtAccessGuard)
+  @ApiDocs({
+    operation: 'list all user ',
+  })
+  @UserProtected()
   @ResponseMessage('Users fetched  successfully.')
   @Get('')
   async list(@Query() userFilterDto: UserFilterDto): Promise<UserEntity[]> {
