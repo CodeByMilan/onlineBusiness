@@ -3,6 +3,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { config } from 'process';
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -10,6 +11,7 @@ import { config } from 'process';
       envFilePath: ['.env'],
     }),
     DatabaseModule,
+
   ],
 })
 export class CommonModule {}

@@ -19,7 +19,7 @@ import {
     IFindAllOptions,
     IFindOneOptions,
     IGetQueryBuilderOption,
-} from '../interfaces/findoption.interface';
+} from '../interfaces/findOption.interface';
 import {
     IUpdateOptions,
     IUpdateRawOptions,
