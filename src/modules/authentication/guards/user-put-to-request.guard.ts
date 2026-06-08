@@ -1,13 +1,15 @@
 import {
-    CanActivate,
-    ExecutionContext,
-    HttpStatus,
-    UnauthorizedException,
+  CanActivate,
+  ExecutionContext,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
 } from '@nestjs/common';
 import IRequest from 'src/common/request/interfaces/request.interface';
 import { UserEntity } from 'src/modules/user/entities/user.entity';
-import { AuthenticationAdminService } from '../services/auth-admin.service';
+import { AuthenticationAdminService } from '../services/authentication.admin.service';
 
+@Injectable()
 export class UserPutToRequestGuard implements CanActivate {
   constructor(private authService: AuthenticationAdminService) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {

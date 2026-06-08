@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IUser } from '../interfaces/user.interfaces';
-import { IsEmail, IsString } from 'class-validator';
+import { IUser, USER_TYPE } from '../interfaces/user.interfaces';
+import { IsEmail, IsEnum, IsString } from 'class-validator';
 
 export class CreateUserDto implements IUser {
   @ApiProperty({
@@ -16,4 +16,11 @@ export class CreateUserDto implements IUser {
   })
   @IsString()
   password: string;
+
+  @ApiProperty({
+    required: false,
+    enum: USER_TYPE,
+  })
+  @IsEnum(USER_TYPE)
+  type: USER_TYPE;
 }

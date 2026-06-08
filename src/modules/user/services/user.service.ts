@@ -21,7 +21,9 @@ export class UserService {
   constructor(private readonly userRepo: UserRepository) {}
   async create(createDto: CreateUserDto, options?: ICreateOptions) {
     await this.checkUserExists(createDto);
-    const data = await this.userRepo._create(createDto);
+    const data = await this.userRepo._create(createDto, {
+      entityManager: options?.entityManager,
+    });
     return data;
   }
 

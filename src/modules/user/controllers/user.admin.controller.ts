@@ -1,15 +1,15 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { UserService } from '../services/user.service';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { DataSource, FindOptionsWhere, QueryRunner } from 'typeorm';
-import { UserEntity } from '../entities/user.entity';
-import { ResponseMessage } from 'src/common/response/decorators/responseMessage.decorators';
-import { UserFilterDto } from '../dto/filter-user.dto';
-import { isFalsy } from 'src/common/request/validators/custom-validator';
-import { AuthJwtAccessGuard } from 'src/common/auth/guards/jwt-access/auth.jwt-access.guard';
-import { ApiDocs } from 'src/common/doc/common-docs';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { UserProtected } from 'src/common/auth/decorators/auth.decorators';
+import { ApiDocs } from 'src/common/doc/common-docs';
+import { isFalsy } from 'src/common/request/validators/custom-validator';
+import { ResponseMessage } from 'src/common/response/decorators/responseMessage.decorators';
+import { DataSource, FindOptionsWhere, QueryRunner } from 'typeorm';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UserFilterDto } from '../dto/filter-user.dto';
+import { UserEntity } from '../entities/user.entity';
+import { UserService } from '../services/user.service';
+import { USER_TYPE } from '../interfaces/user.interfaces';
 
 @ApiTags('User')
 @Controller('user')
@@ -27,9 +27,7 @@ export class UserAdminController {
 
     try {
       const data = await this.userService.create(
-        {
-          ...body,
-        },
+        { type: USER_TYPE.ADMIN, ...body },
         {
           entityManager: queryRunner.manager,
         },
