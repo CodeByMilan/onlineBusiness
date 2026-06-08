@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { config } from 'process';
+import { DatabaseModule } from './database/database.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -11,7 +11,7 @@ import { config } from 'process';
       envFilePath: ['.env'],
     }),
     DatabaseModule,
-
+    AuthModule,
   ],
 })
 export class CommonModule {}
