@@ -5,12 +5,12 @@ import {
 } from '@nestjs/common';
 import { LoginDto } from '../dto/admin.login.dto';
 import { UserService } from 'src/modules/user/services/user.service';
-import { UserEntity } from 'src/modules/user/entities/user.entity';
 import { EntityManager, FindOptionsWhere } from 'typeorm';
 import { AuthToken } from '../serializations/auth.serialization';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { UserEntity } from 'src/modules/user/repositoy/entities/user.entity';
 
 @Injectable()
 export class AuthenticationAdminService {

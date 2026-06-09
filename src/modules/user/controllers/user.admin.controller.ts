@@ -7,7 +7,7 @@ import { ResponseMessage } from 'src/common/response/decorators/responseMessage.
 import { DataSource, FindOptionsWhere, QueryRunner } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserFilterDto } from '../dto/filter-user.dto';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../repositoy/entities/user.entity';
 import { UserService } from '../services/user.service';
 import { USER_TYPE } from '../interfaces/user.interfaces';
 

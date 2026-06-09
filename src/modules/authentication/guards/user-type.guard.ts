@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import IRequest from "src/common/request/interfaces/request.interface";
-import { UserEntity } from "src/modules/user/entities/user.entity";
 import { USER_TYPE } from "src/modules/user/interfaces/user.interfaces";
+import { UserEntity } from "src/modules/user/repositoy/entities/user.entity";
 
 @Injectable()
 export class UserTypeGuard implements CanActivate {

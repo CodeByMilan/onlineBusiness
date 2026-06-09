@@ -1,4 +1,4 @@
-import { UserEntity } from 'src/modules/user/entities/user.entity';
+import { UserEntity } from 'src/modules/user/repositoy/entities/user.entity';
 
 export default interface IRequest extends Request {
   __user: UserEntity;

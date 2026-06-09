@@ -1,7 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
 import { DatabaseBaseEntity } from 'src/common/database/base/entity/BaseEntity';
 import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
-import { USER_TYPE } from '../interfaces/user.interfaces';
+import { USER_TYPE } from '../../interfaces/user.interfaces';
 import {
   ADMIN_ONLY_GROUP,
   ALL_GROUP,
@@ -18,7 +18,7 @@ export class UserEntity extends DatabaseBaseEntity {
   @Column({ type: 'text', select: false, nullable: false })
   password: string;
   @Expose({ groups: ADMIN_ONLY_GROUP })
-  @Column({ type: String, length: 50, nullable: true })
+  @Column({ type: 'varchar', enum: USER_TYPE, nullable: true })
   type: USER_TYPE;
 
   @BeforeInsert()

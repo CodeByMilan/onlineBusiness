@@ -6,8 +6,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import IRequest from 'src/common/request/interfaces/request.interface';
-import { UserEntity } from 'src/modules/user/entities/user.entity';
 import { AuthenticationAdminService } from '../services/authentication.admin.service';
+import { UserEntity } from 'src/modules/user/repositoy/entities/user.entity';
 
 @Injectable()
 export class UserPutToRequestGuard implements CanActivate {

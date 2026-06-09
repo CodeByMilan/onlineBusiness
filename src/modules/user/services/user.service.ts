@@ -3,9 +3,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserRepository } from '../repositories/user.repository';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../repositoy/entities/user.entity';
 import {
   IFindAllOptions,
   IFindOneOptions,
@@ -15,6 +14,7 @@ import { IUpdateOptions } from 'src/common/database/base/interfaces/updateOption
 import { Not } from 'typeorm';
 import { IDeleteOptions } from 'src/common/database/base/interfaces/deleteOption.interface';
 import { ICreateOptions } from 'src/common/database/base/interfaces/createOption.interface';
+import { UserRepository } from '../repositoy/user.repository';
 
 @Injectable()
 export class UserService {
