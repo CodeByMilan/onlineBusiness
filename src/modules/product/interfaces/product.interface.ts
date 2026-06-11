@@ -7,3 +7,4 @@ export interface IProduct{
   description: string;
   quantity: number;
 }
+
