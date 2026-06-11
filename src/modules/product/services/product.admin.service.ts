@@ -10,7 +10,7 @@ import {
 } from 'src/common/database/base/interfaces/findOption.interface';
 
 @Injectable()
-export class ProductService {
+export class ProductAdminService {
   constructor(protected readonly productRepo: ProductRepository) {}
 
   async create(

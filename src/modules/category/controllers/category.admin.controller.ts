@@ -7,7 +7,7 @@ import { ResponseMessage } from 'src/common/response/decorators/responseMessage.
 import { IResponse } from 'src/common/response/interfaces/response.interface';
 import { CategoryAdminService } from '../services/category.admin.service';
 
-ApiTags('category');
+@ApiTags('category')
 @Controller('category')
 export class CategoryAdminController {
   constructor(private readonly categoryAdminService: CategoryAdminService) {}
@@ -27,5 +27,4 @@ export class CategoryAdminController {
       throw error;
     }
   }
-
 }
