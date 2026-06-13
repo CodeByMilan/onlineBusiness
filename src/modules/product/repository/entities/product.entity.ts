@@ -26,6 +26,6 @@ export class ProductEntity extends DatabaseBaseEntity implements IProduct {
   @Column({ type: 'text', nullable: true })
   description: string;
   @Expose({ groups: ALL_GROUP })
-  @Column({ type: 'int', length: 255, nullable: true })
+  @Column({ type: 'int', nullable: true })
   quantity: number;
 }
