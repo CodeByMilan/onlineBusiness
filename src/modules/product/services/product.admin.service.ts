@@ -2,12 +2,13 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { ICreateOptions } from 'src/common/database/base/interfaces/createOption.interface';
 import { ProductEntity } from '../repository/entities/product.entity';
-import { ILike } from 'typeorm';
+import { DeepPartial, ILike, Not } from 'typeorm';
 import { ProductRepository } from '../repository/repositories/product.repository.module';
 import {
   IFindAllOptions,
   IFindOneOptions,
 } from 'src/common/database/base/interfaces/findOption.interface';
+import { IUpdateOptions } from 'src/common/database/base/interfaces/updateOption.interface';
 
 @Injectable()
 export class ProductAdminService {
@@ -54,5 +55,29 @@ export class ProductAdminService {
     options?: IFindAllOptions<ProductEntity>,
   ): Promise<ProductEntity[]> {
     return await this.productRepo._findAll(options);
+  }
+
+
+  async update(
+    repository: ProductEntity,
+    updateData: DeepPartial<ProductEntity>,
+    options?: IUpdateOptions<ProductEntity>,
+  ) {
+    if (updateData.name) {
+      const existingProduct = await this.getOne({
+        options: {
+          where: {
+            name: ILike(`${updateData.name}`),
+            id: Not(repository.id),
+          },
+        },
+      });
+      if (existingProduct) {
+        throw new BadRequestException('Product with that same name exists');
+      }
+    }
+    Object.assign(repository, updateData);
+
+    return await this.productRepo._update(repository, options);
   }
 }
