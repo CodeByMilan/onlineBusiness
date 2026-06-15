@@ -1,12 +1,14 @@
 import { Exclude, Expose } from 'class-transformer';
 import { DatabaseBaseEntity } from 'src/common/database/base/entity/BaseEntity';
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 import { USER_TYPE } from '../../interfaces/user.interfaces';
 import {
   ADMIN_ONLY_GROUP,
   ALL_GROUP,
 } from 'src/database/constant/serialization-group.constant';
 import * as bcrypt from 'bcryptjs';
+import { ProductEntity } from 'src/modules/product/repository/entities/product.entity';
+import { CategoryEntity } from 'src/modules/category/repository/entities/category.entity';
 
 export const USER_TABLE_NAME = 'user';
 @Entity({ name: USER_TABLE_NAME })
@@ -20,6 +22,14 @@ export class UserEntity extends DatabaseBaseEntity {
   @Expose({ groups: ADMIN_ONLY_GROUP })
   @Column({ type: 'varchar', enum: USER_TYPE, nullable: true })
   type: USER_TYPE;
+
+
+  //Relations
+  @OneToMany(() => ProductEntity, (e) => e.user)
+  product?: ProductEntity[];
+
+  @OneToMany(() => CategoryEntity, (e) => e.user)
+  category?: CategoryEntity[];
 
   @BeforeInsert()
   @BeforeUpdate()
