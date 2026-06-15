@@ -37,6 +37,12 @@ export class UserService {
   async getAll(options?: IFindAllOptions<UserEntity>): Promise<UserEntity[]> {
     return await this.userRepo._findAll(options);
   }
+  async getOne(
+    options: IFindOneOptions<UserEntity>,
+  ): Promise<UserEntity | null> {
+    const data = await this.userRepo._findOne(options);
+    return data;
+  }
   async update(
     repo: UserEntity,
     updateData: UpdateUserDto,
@@ -66,12 +72,29 @@ export class UserService {
   ): Promise<UserEntity> {
     return await this.userRepo._delete(repo, options);
   }
-  async getOne(
-    options: IFindOneOptions<UserEntity>,
-  ): Promise<UserEntity | null> {
-    const data = await this.userRepo._findOne(options);
+
+  /*
+  get userDetails 
+ */
+  async getUserDetail(repo: UserEntity) {
+    const data = await this.getById(repo.id, {
+      options: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          phoneNumber: true,
+          address: true,
+        },
+      },
+    });
+    if (!data) throw new NotFoundException('Cannot find user');
     return data;
   }
+  /* 
+  check if the user with the provided email address exits or not
+  */
   async checkUserExists(user: Partial<UserEntity>) {
     const foundUser = await this.getOne({
       options: {
