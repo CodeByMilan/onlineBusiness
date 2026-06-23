@@ -7,4 +7,6 @@ export class CreateCategoryDto implements Partial<ICategory> {
     example: 'Traditional Wear',
   })
   name: string;
+
+  userId: number;
 }

@@ -1,7 +1,14 @@
 import { UserPutToRequestGuard } from 'src/modules/authentication/guards/user-put-to-request.guard';
 import { AuthJwtAccessGuard } from '../guards/jwt-access/auth.jwt-access.guard';
 import { UserTypeGuard } from 'src/modules/authentication/guards/user-type.guard';
-import { applyDecorators, UseGuards } from '@nestjs/common';
+import {
+  applyDecorators,
+  createParamDecorator,
+  ExecutionContext,
+  UseGuards,
+} from '@nestjs/common';
+import { UserEntity } from 'src/modules/user/repository/entities/user.entity';
+import IRequest from 'src/common/request/interfaces/request.interface';
 
 /* 
 simply combines multiple guards into one guard 
@@ -21,3 +28,12 @@ export function UserProtected(options?: {
 
   return applyDecorators(UseGuards(...decorators));
 }
+
+export const GetUser = createParamDecorator(
+  (returnPlain: boolean, ctx: ExecutionContext): UserEntity => {
+    const req = ctx
+      .switchToHttp()
+      .getRequest<IRequest & { __user: UserEntity }>();
+    return returnPlain ? req.__user : req.__user;
+  },
+);

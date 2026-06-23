@@ -4,7 +4,7 @@ import { DatabaseBaseEntity } from 'src/common/database/base/entity/BaseEntity';
 import { ALL_GROUP } from 'src/database/constant/serialization-group.constant';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 import { IProduct } from '../../interfaces/product.interface';
-import { UserEntity } from 'src/modules/user/repositoy/entities/user.entity';
+import { UserEntity } from 'src/modules/user/repository/entities/user.entity';
 import { BigIntTransformerPipe } from 'src/utils/bigIntTransformer';
 import { CategoryEntity } from 'src/modules/category/repository/entities/category.entity';
 

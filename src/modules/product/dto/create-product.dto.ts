@@ -56,4 +56,14 @@ export class CreateProductDto implements Partial<IProduct> {
   @IsNotEmpty()
   @IsNumber()
   quantity: number;
+
+  @ApiProperty({
+    required: true,
+    example: 3,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  categoryId: number;
+
+  userId: number;
 }

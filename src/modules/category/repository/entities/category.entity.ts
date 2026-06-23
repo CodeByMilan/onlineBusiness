@@ -5,7 +5,7 @@ import { ALL_GROUP } from 'src/database/constant/serialization-group.constant';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 import { ICategory } from '../../interfaces/category.interface';
 import { ProductEntity } from 'src/modules/product/repository/entities/product.entity';
-import { UserEntity } from 'src/modules/user/repositoy/entities/user.entity';
+import { UserEntity } from 'src/modules/user/repository/entities/user.entity';
 import { BigIntTransformerPipe } from 'src/utils/bigIntTransformer';
 
 export const CATEGORY_TABLE_NAME = 'category';

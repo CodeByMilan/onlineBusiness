@@ -17,7 +17,7 @@ import { ResponseMessage } from 'src/common/response/decorators/responseMessage.
 import { DataSource, FindOptionsWhere, QueryRunner } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserFilterDto } from '../dto/filter-user.dto';
-import { UserEntity } from '../repositoy/entities/user.entity';
+import { UserEntity } from '../repository/entities/user.entity';
 import { UserService } from '../services/user.service';
 import { USER_TYPE } from '../interfaces/user.interfaces';
 import { IdParamDto } from 'src/common/dto/id-param.dto';
@@ -140,7 +140,7 @@ except password every other fields can be updated for now
 delete user
 */
   @ApiDocs({
-    operation: 'Soft delete user',
+    operation: ' delete user',
     params: [
       {
         type: 'number',
@@ -152,7 +152,7 @@ delete user
   @RequestParamGuard(IdParamDto)
   @ResponseMessage('User  deleted successfully.')
   @Delete('/:id')
-  async softDeleteById(
+  async deleteById(
     @Param('id') id: number,
   ): Promise<IResponse<UserEntity>> {
     const found: UserEntity | null = await this.userService.getById(id);

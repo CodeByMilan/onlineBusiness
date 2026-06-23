@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { DataSource, Repository, UpdateResult } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { BaseRepository } from '../../../common/database/base/repositories/base.repository';
+
 import {
   IUpdateOptions,
   IUpdateRawOptions,
 } from 'src/common/database/base/interfaces/updateOption.interface';
-import { UserEntity } from './entities/user.entity';
+import { UserEntity } from '../entities/user.entity';
+import { BaseRepository } from 'src/common/database/base/repositories/base.repository';
+
 
 @Injectable()
 export class UserRepository extends BaseRepository<UserEntity> {
