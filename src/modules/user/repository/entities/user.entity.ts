@@ -14,6 +14,8 @@ import * as bcrypt from 'bcryptjs';
 import { ProductEntity } from 'src/modules/product/repository/entities/product.entity';
 import { CategoryEntity } from 'src/modules/category/repository/entities/category.entity';
 import { OrderEntity } from 'src/modules/order/repository/entities/order.entity';
+import { WishlistEntity } from 'src/modules/wishlist/repository/entities/wishlist.entity';
+import { ReviewEntity } from 'src/modules/review/repository/entities/review.entity';
 
 export const USER_TABLE_NAME = 'user';
 @Entity({ name: USER_TABLE_NAME })
@@ -106,6 +108,13 @@ export class UserEntity extends DatabaseBaseEntity implements IUser {
   @OneToMany(() => OrderEntity, (order) => order.user)
   orders: OrderEntity[];
 
+  @OneToMany(() => ReviewEntity, (review) => review.user)
+  reviews: ReviewEntity[];
+
+  @OneToMany(() => WishlistEntity, (wishlist) => wishlist.user)
+  wishlist: WishlistEntity[];
+
+  //functions
   @BeforeInsert()
   @BeforeUpdate()
   async hashPasswordBeforeInsertOrUpdate() {

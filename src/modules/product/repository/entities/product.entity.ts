@@ -15,6 +15,8 @@ import { UserEntity } from 'src/modules/user/repository/entities/user.entity';
 import { BigIntTransformerPipe } from 'src/utils/bigIntTransformer';
 import { CategoryEntity } from 'src/modules/category/repository/entities/category.entity';
 import { ProductVariantEntity } from './product.variants.entity';
+import { WishlistEntity } from 'src/modules/wishlist/repository/entities/wishlist.entity';
+import { ReviewEntity } from 'src/modules/review/repository/entities/review.entity';
 
 export const PRODUCT_TABLE_NAME = 'product';
 @Entity({ name: PRODUCT_TABLE_NAME })
@@ -80,4 +82,10 @@ export class ProductEntity extends DatabaseBaseEntity implements IProduct {
 
   @OneToMany(() => ProductVariantEntity, (variant) => variant.product)
   variants: ProductVariantEntity[];
+
+  @OneToMany(() => ReviewEntity, (review) => review.product)
+  reviews: ReviewEntity[];
+
+  @OneToMany(() => WishlistEntity, (wishlist) => wishlist.product)
+  wishlist: WishlistEntity[];
 }

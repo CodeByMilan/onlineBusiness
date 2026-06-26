@@ -58,7 +58,7 @@ export class OrderEntity extends DatabaseBaseEntity implements IOrder {
     name: 'user_id',
     transformer: new BigIntTransformerPipe(),
   })
-  userId: string;
+  userId: number;
   // Relations
   @ManyToOne(() => UserEntity, (user) => user.orders, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'user_id' })
