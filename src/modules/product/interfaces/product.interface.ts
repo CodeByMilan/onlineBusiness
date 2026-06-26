@@ -6,5 +6,7 @@ export interface IProduct{
   status: PRODUCT_STATUS_ENUM;
   description: string;
   quantity: number;
+  userId:number
+  categoryId:number
 }
 

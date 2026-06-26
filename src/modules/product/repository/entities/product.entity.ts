@@ -2,11 +2,19 @@ import { Expose } from 'class-transformer';
 import { PRODUCT_STATUS_ENUM } from 'src/common/constants/status.constants';
 import { DatabaseBaseEntity } from 'src/common/database/base/entity/BaseEntity';
 import { ALL_GROUP } from 'src/database/constant/serialization-group.constant';
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { IProduct } from '../../interfaces/product.interface';
 import { UserEntity } from 'src/modules/user/repository/entities/user.entity';
 import { BigIntTransformerPipe } from 'src/utils/bigIntTransformer';
 import { CategoryEntity } from 'src/modules/category/repository/entities/category.entity';
+import { ProductVariantEntity } from './product.variants.entity';
 
 export const PRODUCT_TABLE_NAME = 'product';
 @Entity({ name: PRODUCT_TABLE_NAME })
@@ -15,7 +23,13 @@ export class ProductEntity extends DatabaseBaseEntity implements IProduct {
   @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
   @Expose({ groups: ALL_GROUP })
-  @Column({ type: 'float', nullable: false })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    default: 0,
+    nullable: false,
+  })
   price: number;
   @Expose({ groups: ALL_GROUP })
   @Column({
@@ -51,9 +65,10 @@ export class ProductEntity extends DatabaseBaseEntity implements IProduct {
   //Relations
   @ManyToOne(() => UserEntity, (user) => user.product, {
     cascade: false,
+    onDelete: 'RESTRICT',
   })
   @JoinColumn({ name: 'user_id' })
-  user?: UserEntity;
+  user: UserEntity;
 
   @OneToOne(() => CategoryEntity, (category) => category.id, {
     onDelete: 'CASCADE',
@@ -61,5 +76,8 @@ export class ProductEntity extends DatabaseBaseEntity implements IProduct {
   @JoinColumn({
     name: 'category_id',
   })
-  category?: CategoryEntity;
+  category: CategoryEntity;
+
+  @OneToMany(() => ProductVariantEntity, (variant) => variant.product)
+  variants: ProductVariantEntity[];
 }

@@ -13,6 +13,7 @@ import {
 import * as bcrypt from 'bcryptjs';
 import { ProductEntity } from 'src/modules/product/repository/entities/product.entity';
 import { CategoryEntity } from 'src/modules/category/repository/entities/category.entity';
+import { OrderEntity } from 'src/modules/order/repository/entities/order.entity';
 
 export const USER_TABLE_NAME = 'user';
 @Entity({ name: USER_TABLE_NAME })
@@ -97,10 +98,13 @@ export class UserEntity extends DatabaseBaseEntity implements IUser {
 
   //Relations
   @OneToMany(() => ProductEntity, (e) => e.user)
-  product?: ProductEntity[];
+  product: ProductEntity[];
 
   @OneToMany(() => CategoryEntity, (e) => e.user)
-  category?: CategoryEntity[];
+  category: CategoryEntity[];
+
+  @OneToMany(() => OrderEntity, (order) => order.user)
+  orders: OrderEntity[];
 
   @BeforeInsert()
   @BeforeUpdate()
