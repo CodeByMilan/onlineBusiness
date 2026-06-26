@@ -9,6 +9,7 @@ import {
   IFindOneOptions,
 } from 'src/common/database/base/interfaces/findOption.interface';
 import { IUpdateOptions } from 'src/common/database/base/interfaces/updateOption.interface';
+import { IDeleteOptions } from 'src/common/database/base/interfaces/deleteOption.interface';
 
 @Injectable()
 export class ProductAdminService {
@@ -31,7 +32,8 @@ export class ProductAdminService {
         'Product with the same name  already exists',
       );
     }
-
+    const userId = options?.user?.id;
+    createDto.userId = userId;
     const data = await this.productRepo._create(createDto, options);
     return data;
   }
@@ -57,7 +59,6 @@ export class ProductAdminService {
     return await this.productRepo._findAll(options);
   }
 
-
   async update(
     repository: ProductEntity,
     updateData: DeepPartial<ProductEntity>,
@@ -79,5 +80,11 @@ export class ProductAdminService {
     Object.assign(repository, updateData);
 
     return await this.productRepo._update(repository, options);
+  }
+  async delete(
+    repository: ProductEntity,
+    options?: IDeleteOptions<ProductEntity>,
+  ): Promise<ProductEntity> {
+    return await this.productRepo._delete(repository, options);
   }
 }

@@ -10,7 +10,7 @@ import { AuthToken } from '../serializations/auth.serialization';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { UserEntity } from 'src/modules/user/repositoy/entities/user.entity';
+import { UserEntity } from 'src/modules/user/repository/entities/user.entity';
 
 @Injectable()
 export class AuthenticationAdminService {

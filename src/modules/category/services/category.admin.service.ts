@@ -38,6 +38,8 @@ export class CategoryAdminService {
         'Category already exists same name or position',
       );
     }
+    const userId = options.user.id;
+    createDto.userId = userId;
     const data = await this.repository._create(createDto, options);
     return data;
   }
@@ -103,5 +105,4 @@ export class CategoryAdminService {
 
     return await this.repository._update(repository, options);
   }
-
 }
